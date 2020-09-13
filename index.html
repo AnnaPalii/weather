@@ -14,14 +14,15 @@
 
 </head>
 <body>
+  <!--Page Header -->
   <div class="jumbotron">
     <div class="container">
       <h1 class="display-6">Weather Dashboard </h1>
     </div>
   </div>
 
-
-  <div class="container" >
+   <!-- Page main container with rows -->
+  <div class="container">
     <div class="row">
 
     <div class="col">
@@ -33,34 +34,39 @@
     </form>
 
     <ul class="list-group">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-      <li class="list-group-item">Vestibulum at eros</li>
+      <li class="list-group-item">Austin</li>
+      <li class="list-group-item">Chicago</li>
+      <li class="list-group-item">New York</li>
+      <li class="list-group-item">Orlando</li>
+      <li class="list-group-item">San Francisco</li>
+      <li class="list-group-item">Seattle</li>
+      <li class="list-group-item">Denver</li>
+      <li class="list-group-item">Atlanta</li> 
     </ul>
 
-    </div>
+  </div>
 
     <div class="col">
 
       <div>
 
         <div id="search-results">
-          <h3>Search Result</h3>
-          <p id="temprature">!</p>
-          <p id="humidity">!</p>
-          <p id="wind-speed">!</p>
-          <p id="uv-index">!</p>
+          <h5 id="city-name"></h5>
+          <p id="temp"></p>
+          <p id="humidity"></p>
+          <p id="wind-speed"></p>
+          <p id="uv-index"></p>
         </div>
 
         <div id="forecast">
           <h6>5-Day Forecast:</h6>
-          <p id="day1">day1</p>
-          <p id="day2">day2</p>
-          <p id="day3">day3</p>
-          <p id="day4">day4</p>
-          <p id="day5">day5</p>
+          <div class="row">
+            <div class="col daily" id="day1">day1</div>
+            <div class="col daily" id="day2">day2</div>
+            <div class="col daily" id="day3">day3</div>
+            <div class="col daily" id="day4">day4</div>
+            <div class="col daily" id="day5">day5</div>
+          </div>
         </div>
 
 
@@ -77,43 +83,74 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
       // This is our API key
-var APIKey = "4c023acf398932e1b43cd03002ad8542";
+      var APIKey = "4c023acf398932e1b43cd03002ad8542";
   
-      // Here we are building the URL we need to query the database
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-        "q=Bujumbura,Burundi&appid=" + APIKey;
+      // Here we are building the URL we need to query the database to get current weather
+      var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?" +
+        "q=New York,USA&appid=" + APIKey;
+      
+      // Here we are building the URL we need to query the database to get forecast
+        var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?" +
+        "q=New York,USA&appid=" + APIKey;
   
-      // Here we run our AJAX call to the OpenWeatherMap API
+      // Here we run our AJAX call to the OpenWeatherMap API for current weather
       $.ajax({
-        url: queryURL,
+        url: queryURL1,
         method: "GET"
       })
         // We store all of the retrieved data inside of an object called "response"
         .then(function(response) {
   
           // Log the queryURL
-          console.log(queryURL);
+          console.log(queryURL1);
   
           // Log the resulting object
           console.log(response);
   
+          // Get current date
+          var d = new Date();
+          var strDate = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+          console.log(strDate);
+
           // Transfer content to HTML
-          $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-          $(".wind").text("Wind Speed: " + response.wind.speed);
-          $(".humidity").text("Humidity: " + response.main.humidity);
-          
+          $("#city-name").text(response.name + " " + strDate);                   
           // Convert the temp to fahrenheit
-          var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-  
-          // add temp content to html
-          $(".temp").text("Temperature (K) " + response.main.temp);
-          $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
-  
+          var tempF = ((response.main.temp - 273.15) * 1.80 + 32).toFixed(2);
+
           // Log the data in the console as well
           console.log("Wind Speed: " + response.wind.speed);
           console.log("Humidity: " + response.main.humidity);
           console.log("Temperature (F): " + tempF);
+
+          // Transfer content to HTML
+          $("#temp").text("Temperature: " + tempF +" F");
+          $("#humidity").text("Humidity: " + response.main.humidity);
+          $("#wind-speed").text("Wind Speed: " + response.wind.speed);
+          $("#uv-index").text("UV Index: " + "Uknown");
         }); 
+
+
+      // Here we run our AJAX call to the OpenWeatherMap API for forecast weather
+      $.ajax({
+        url: queryURL2,
+        method: "GET"
+      })
+      // We store all of the retrieved data inside of an object called "response2"
+        .then(function(response2) {
+  
+          // Log the queryURL
+          console.log(queryURL2);
+  
+          // Log the resulting object
+          console.log(response2);
+  
+
+        }); 
+
+
+
+
+
     </script>
 </body>
 </html>
