@@ -61,11 +61,11 @@
         <div id="forecast">
           <h6>5-Day Forecast:</h6>
           <div class="row">
-            <div class="col daily" id="day1">day1</div>
-            <div class="col daily" id="day2">day2</div>
-            <div class="col daily" id="day3">day3</div>
-            <div class="col daily" id="day4">day4</div>
-            <div class="col daily" id="day5">day5</div>
+            <section class="col daily" id="day1">day1</section>
+            <section class="col daily" id="day2">day2</section>
+            <section class="col daily" id="day3">day3</section>
+            <section class="col daily" id="day4">day4</section>
+            <section class="col daily" id="day5">day5</section>
           </div>
         </div>
 
@@ -143,7 +143,11 @@
   
           // Log the resulting object
           console.log(response2);
-  
+          $("section").each(function(index){
+            console.log(index + ": " + $(this).text());  
+            $("#")
+
+          });
 
         }); 
 
