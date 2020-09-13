@@ -1,0 +1,22 @@
+.jumbotron {
+    text-align: center;
+    color: darkslategray;
+    background-color: bisque;
+    padding: 20px;
+}
+.container {
+margin: 10px;  
+}
+
+#search {
+    padding: 10px;
+
+}
+#search-results {
+    border: black solid;
+    padding: 20px;
+}
+#forecast{
+    border: black solid;
+    padding: 20px;
+}
