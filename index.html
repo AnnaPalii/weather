@@ -53,11 +53,11 @@
         <div id="forecast">
           <h6>5-Day Forecast:</h6>
           <div class="row">
-            <section class="col daily" id="day1">day1</section>
-            <section class="col daily" id="day2">day2</section>
-            <section class="col daily" id="day3">day3</section>
-            <section class="col daily" id="day4">day4</section>
-            <section class="col daily" id="day5">day5</section>
+            <section class="col daily" id="day1"></section>
+            <section class="col daily" id="day2"></section>
+            <section class="col daily" id="day3"></section>
+            <section class="col daily" id="day4"></section>
+            <section class="col daily" id="day5"></section>
           </div>
         </div>
 
@@ -144,12 +144,35 @@
 
 
           $("section").each(function(index){
-            // console.log(index + ": " + $(this).text()); 
+ 
+          // Creating div to hold elements 
+          var dateVal = $("<div>");
+            $("#day"+[index+1]).append(dateVal);
 
-            var response2Arr =response2.list;
-            console.log(response2Arr[index*9]);
-            // Creating div to hold date 
-            var dateVal = $("<div class='date'>");
+          // Separating array for each day from response
+            var response2Arr= response2.list[index*9];
+            // console.log(response2Arr);
+
+          // Creating element & appending them for forecast
+            var responseDt = response2Arr.dt_txt;
+            var responseDtEl = $("<div>").addClass("date");
+            dateVal.append(responseDtEl);
+            var responseDtNew =responseDt.toString('dd-MM-yy');
+            console.log(responseDtNew);
+            responseDtEl.append(responseDtNew);
+
+            var responseTemp = ((response2Arr.main.temp - 273.15) * 1.80 + 32).toFixed(2);
+            console.log(responseTemp);
+            dateVal.append(responseTemp);
+
+            var responseHum = response2Arr.main.humidity; 
+            console.log(responseHum);
+            dateVal.append(responseHum);
+
+
+
+
+
 
 
           });
