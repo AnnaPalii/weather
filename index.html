@@ -21,7 +21,7 @@
     </div>
   </div>
 
-   <!-- Page main container with rows -->
+  <!-- Page main container with rows -->
   <div class="container">
     <div class="row">
 
@@ -30,18 +30,10 @@
     <form id="search">
     <h5 class="display-6">Search for a City:</h5>
     <input type="text" class="form-control" id="city" aria-describedby="basic-addon3">
-    <input class="btn btn-primary" type="submit" value="Search">
+    <input class="btn btn-primary" id="search" type="submit" value="Search">
     </form>
 
     <ul class="list-group">
-      <li class="list-group-item">Austin</li>
-      <li class="list-group-item">Chicago</li>
-      <li class="list-group-item">New York</li>
-      <li class="list-group-item">Orlando</li>
-      <li class="list-group-item">San Francisco</li>
-      <li class="list-group-item">Seattle</li>
-      <li class="list-group-item">Denver</li>
-      <li class="list-group-item">Atlanta</li> 
     </ul>
 
   </div>
@@ -82,17 +74,23 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-      // This is our API key
-      var APIKey = "4c023acf398932e1b43cd03002ad8542";
+    //Add click event listener
+    $("#search").click(function(){
+    event.preventDefault();  
+    var cityName = $("#city").val();
+    localStorage.citySearch= $("#city").val();
+    console.log(cityName);
+
+    // // This is our API key
+    var APIKey = "4c023acf398932e1b43cd03002ad8542";
   
-      // Here we are building the URL we need to query the database to get current weather
-      var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?" +
-        "q=New York,USA&appid=" + APIKey;
+    // // Here we are building the URL we need to query the database to get current weather
+    var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?" + "q=" + cityName + "&appid=" + APIKey;
       
-      // Here we are building the URL we need to query the database to get forecast
-        var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?" +
-        "q=New York,USA&appid=" + APIKey;
+    // // Here we are building the URL we need to query the database to get forecast
+    var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?" + "q=" + cityName + "&appid=" + APIKey;
   
+
       // Here we run our AJAX call to the OpenWeatherMap API for current weather
       $.ajax({
         url: queryURL1,
@@ -143,13 +141,22 @@
   
           // Log the resulting object
           console.log(response2);
+
+
           $("section").each(function(index){
-            console.log(index + ": " + $(this).text());  
-            $("#")
+            // console.log(index + ": " + $(this).text()); 
+
+            var response2Arr =response2.list;
+            console.log(response2Arr[index*9]);
+            // Creating div to hold date 
+            var dateVal = $("<div class='date'>");
+
 
           });
 
         }); 
+
+      });
 
 
 
