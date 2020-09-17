@@ -26,28 +26,28 @@
     <div class="row">
 
     <div class="col">
-
-    <form id="search">
-    <h5 class="display-6">Search for a City:</h5>
-    <input type="text" class="form-control" id="city" aria-describedby="basic-addon3">
-    <input class="btn btn-primary" id="search" type="submit" value="Search">
-    </form>
-
+      <form id="search">
+      <h5 class="display-6">Search for a City:</h5>
+      <input type="text" class="form-control" id="city" aria-describedby="basic-addon3">
+      <div class="col">
+      <input class="btn btn-primary" id="search" type="submit" value="Search">
+    </div>
+      </form>
+    </div>
+ 
     <ul class="list-group">
     </ul>
 
-  </div>
+ 
 
     <div class="col">
 
-      <div>
-
         <div id="search-results">
           <h5 id="city-name"></h5>
+          <img id="icon">
           <p id="temp"></p>
           <p id="humidity"></p>
           <p id="wind-speed"></p>
-          <p id="uv-index"></p>
         </div>
 
         <div id="forecast">
@@ -121,10 +121,10 @@
           console.log("Temperature (F): " + tempF);
 
           // Transfer content to HTML
+          $("#icon").attr("src", "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png")
           $("#temp").text("Temperature: " + tempF +" F");
           $("#humidity").text("Humidity: " + response.main.humidity);
           $("#wind-speed").text("Wind Speed: " + response.wind.speed);
-          $("#uv-index").text("UV Index: " + "Uknown");
         }); 
 
 
@@ -144,7 +144,7 @@
 
 
           $("section").each(function(index){
- 
+
           // Creating div to hold elements 
           var dateVal = $("<div>");
             $("#day"+[index+1]).append(dateVal);
@@ -154,26 +154,30 @@
             // console.log(response2Arr);
 
           // Creating element & appending them for forecast
+            var cityName = response2.city.name;
             var responseDt = response2Arr.dt_txt;
-            var responseDtEl = $("<div>").addClass("date");
-            dateVal.append(responseDtEl);
-            // DOES NOT WORK BECAUSE DATE IS ALREADY IN STRING FORMAT 
-            var responseDtNew =responseDt.toString('dd-MM-yy'); 
-            console.log(responseDtNew);
-            responseDtEl.append(responseDtNew);
+            console.log(cityName);
+            var responseCityEl = $("<div>").addClass("cityName");
+            dateVal.append(responseCityEl);
+            responseCityEl.text(cityName + " " + responseDt);
+
+            var responseCityIcon = $("<img>");
+            dateVal.append(responseCityIcon);
+            responseCityIcon.attr("src", "https://openweathermap.org/img/w/" + response2Arr.weather[0].icon + ".png")
 
 
-            // ADD ICON 
 
             var responseTemp = ((response2Arr.main.temp - 273.15) * 1.80 + 32).toFixed(2);
-            // CREATE DIV & ADD CLASS 
+            var responseTempEl =$("<div>").addClass("temp");
+            dateVal.append(responseTempEl);
             console.log(responseTemp);
-            dateVal.append(responseTemp);
+            responseTempEl.text("Temperature: " + responseTemp +" F");;
 
             var responseHum = response2Arr.main.humidity; 
+            var responseHumEl =$("<div>").addClass("temp");
+            dateVal.append(responseHumEl);
             console.log(responseHum);
-            // CREATE DIV & ADD CLASS 
-            dateVal.append(responseHum);
+            responseHumEl.text("Humidity: " + responseHum);
 
 
 

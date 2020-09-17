@@ -32,7 +32,5 @@ THEN I am presented with the last searched city forecast
 
 ## Link of the deployed application
 
-```
  https://annapalii.github.io/weather/.
- 
-```
+
