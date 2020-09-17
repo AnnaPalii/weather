@@ -157,16 +157,22 @@
             var responseDt = response2Arr.dt_txt;
             var responseDtEl = $("<div>").addClass("date");
             dateVal.append(responseDtEl);
-            var responseDtNew =responseDt.toString('dd-MM-yy');
+            // DOES NOT WORK BECAUSE DATE IS ALREADY IN STRING FORMAT 
+            var responseDtNew =responseDt.toString('dd-MM-yy'); 
             console.log(responseDtNew);
             responseDtEl.append(responseDtNew);
 
+
+            // ADD ICON 
+
             var responseTemp = ((response2Arr.main.temp - 273.15) * 1.80 + 32).toFixed(2);
+            // CREATE DIV & ADD CLASS 
             console.log(responseTemp);
             dateVal.append(responseTemp);
 
             var responseHum = response2Arr.main.humidity; 
             console.log(responseHum);
+            // CREATE DIV & ADD CLASS 
             dateVal.append(responseHum);
 
 
