@@ -1,26 +1,37 @@
+#maincontainer {
+    margin-left: 0px;
+}
+
 body {
-    /* background-image: url("https://thewallpaper.co//wp-content/uploads/2016/08/background-images-love-amazing-nice-weather-sky-romance-high-resolution-widescreen-1920x1080.jpg"); */
-    background-color: #cccccc;
+    background-color: lightgray;
 }
 .jumbotron {
     text-align: center;
     color: darkslategray;
     background-color: bisque;
     padding: 20px;
-    /* border: black solid; */
+    border: black solid;
 }
 
+#searchBlock {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.form-control {
+    display: inline-block;
+    width: 74%;
+    margin-right: -50%;
+}
 #search {
-    padding: 10px;
-
+    float: right;
 }
 #search-results {
-    /* border: black solid; */
+    border: black solid;
     padding: 20px;
-   
 }
+
 #forecast{
-    /* border: black solid; */
+    border: black solid;
     padding: 15px;
     margin: auto;
 
@@ -28,5 +39,17 @@ body {
 .daily {
     background-color: gray;
     color:whitesmoke;
-    margin: 5px;    
+    margin: 5px; 
+    box-sizing: border-box;   
+}
+.city-list {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom: solid lightgray; 
+    padding: 10px;
+}
+.card {
+margin: 10px;
+margin-left: 1px;
+padding: 8px;
+border: solid 2px lightgray;
 }
