@@ -53,3 +53,10 @@ margin-left: 1px;
 padding: 8px;
 border: solid 2px lightgray;
 }
+
+#city-name {
+    float: left;  
+}
+#icon {
+    margin-top: -12px;
+}
